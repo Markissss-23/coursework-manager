@@ -15,7 +15,6 @@
     </properties>
 
     <dependencies>
-        <!-- Jakarta EE 10 APIs — provided by Payara at runtime -->
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-web-api</artifactId>
@@ -23,14 +22,13 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- SQLite JDBC driver — also provided; we'll install it into
-             Payara's lib directory in Step 2, same pattern as your RDS pool lab -->
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.46.1.0</version>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
     <build>
