@@ -21,3 +21,9 @@ I wrote the course and assessment classes today, including a status enum instead
 I then wrote the scheme.sql for the two tables, i decided that when a course gets deleted all the assessments get removed too rather than being left behind or stopping the delete (cascade delete).
 
 I wasn't able to download the normal SQLite browser to download so I downloaded the portable version instead. I then opened up my coursework.db file and ran the schema, both tables show up now, i wrote the changes and committed the schema.sql. 
+
+Session 5 - Aug 25 
+I started the DAO stuff today. Starting with writing the coursedao with the base set of methods. All using a shared datasource. 
+
+I remembered to use "try" for closing connections and used preparedstatement everywhere instead of using SQL strings directly to prevent SQL injection. 
+
