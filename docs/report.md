@@ -27,3 +27,10 @@ I started the DAO stuff today. Starting with writing the coursedao with the base
 
 I remembered to use "try" for closing connections and used preparedstatement everywhere instead of using SQL strings directly to prevent SQL injection. 
 
+Session 6 - Aug 26
+I continued with the DAO layer by creating the AssessmentDao, being a similar but slightly different version of the courseDao. but with two extra conversions, specifically with LocalDate and the status enum. 
+
+I havent gotten to update and delete crud ops yet and havent tested any of the functionality, i'll need to build a test class next time
+
+
+
