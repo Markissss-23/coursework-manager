@@ -21,7 +21,7 @@ public class CourseDao {
     private DataSource dataSource;
 
     public Course create(Course course) throws SQLException {
-        String sql = "INSERT INTO courses (code, name, semester) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO course (code, name, semester) VALUES (?, ?, ?)";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -41,7 +41,7 @@ public class CourseDao {
     }
 
     public List<Course> findAll() throws SQLException {
-        String sql = "SELECT id, code, name, semester FROM courses";
+        String sql = "SELECT id, code, name, semester FROM course";
         List<Course> courses = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
@@ -56,7 +56,7 @@ public class CourseDao {
     }
 
     public Course findById(int id) throws SQLException {
-        String sql = "SELECT id, code, name, semester FROM courses WHERE id = ?";
+        String sql = "SELECT id, code, name, semester FROM course WHERE id = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -72,7 +72,7 @@ public class CourseDao {
     }
 
     public boolean update(Course course) throws SQLException {
-        String sql = "UPDATE courses SET code = ?, name = ?, semester = ? WHERE id = ?";
+        String sql = "UPDATE course SET code = ?, name = ?, semester = ? WHERE id = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -88,7 +88,7 @@ public class CourseDao {
     }
 
     public boolean delete(int id) throws SQLException {
-        String sql = "DELETE FROM courses WHERE id = ?";
+        String sql = "DELETE FROM course WHERE id = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {

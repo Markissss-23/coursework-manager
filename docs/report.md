@@ -32,5 +32,8 @@ I continued with the DAO layer by creating the AssessmentDao, being a similar bu
 
 I havent gotten to update and delete crud ops yet and havent tested any of the functionality, i'll need to build a test class next time
 
+Session 7 - Aug 30
+Started testing the DAO layer today. I found an extension called "Thunder Client" and it really helped. I had to make a few other classes first though. I immedietely found a bug where in CourseDao i had "courses" instead of "course" in the sql. 
 
+Afterwhich i tested the whole flow, but the deletion of a course didnt work as it should have. 
 

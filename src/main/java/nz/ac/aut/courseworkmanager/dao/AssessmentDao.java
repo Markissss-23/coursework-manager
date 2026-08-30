@@ -114,4 +114,52 @@ public class AssessmentDao {
         assessment.setNotes(rs.getString("notes"));
         return assessment;
     }
+
+    public boolean update(Assessment assessment) throws SQLException {
+        String sql = "UPDATE assessment SET course_id = ?, title = ?, due_date = ?, weight = ?, " +
+                "status = ?, priority = ?, notes = ? WHERE id = ?";
+
+        try (Connection conn = dataSource.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, assessment.getCourseId());
+            stmt.setString(2, assessment.getTitle());
+            stmt.setString(3, assessment.getDueDate().toString());
+            stmt.setDouble(4, assessment.getWeight());
+            stmt.setString(5, assessment.getStatus().name());
+            stmt.setString(6, assessment.getPriority());
+            stmt.setString(7, assessment.getNotes());
+            stmt.setInt(8, assessment.getId());
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        }
+    }
+
+    public boolean updateStatus(int id, AssessmentStatus status) throws SQLException {
+        String sql = "UPDATE assessment SET status = ? WHERE id = ?";
+
+        try (Connection conn = dataSource.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, status.name());
+            stmt.setInt(2, id);
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        }
+    }
+
+    public boolean delete(int id) throws SQLException {
+        String sql = "DELETE FROM assessment WHERE id = ?";
+
+        try (Connection conn = dataSource.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        }
+    }
 }
