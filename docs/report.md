@@ -37,3 +37,10 @@ Started testing the DAO layer today. I found an extension called "Thunder Client
 
 Afterwhich i tested the whole flow, but the deletion of a course didnt work as it should have. 
 
+Session 8 - Sep 1
+Fixed the cascade delete bug from last session. Added a ConnectionProvider utility that turns on foreign key support every time a connection is grabbed, then updated both DAOs to use it instead of calling the DataSource directly. I then re-tested the full functionality: create course, create assessment, delete course, check assessment. This time it came back empty, confirming the cascade actually works now.
+
+Also built out the exception handling layer today. Added ValidationException and NotFoundException, plus an ErrorResponse class so every error comes back in the same format. Added a mapper for each one using @Provider, which means JAX-RS automatically catches these exceptions and converts them to the right HTTP status without needing try/catch in every resource method.
+
+Nothing throws these yet, that's next session when I build the real CourseResource and AssessmentResource.
+

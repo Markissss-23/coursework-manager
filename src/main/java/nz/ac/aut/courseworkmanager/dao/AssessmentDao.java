@@ -4,6 +4,7 @@ import jakarta.annotation.Resource;
 import jakarta.enterprise.context.ApplicationScoped;
 import nz.ac.aut.courseworkmanager.model.Assessment;
 import nz.ac.aut.courseworkmanager.model.AssessmentStatus;
+import nz.ac.aut.courseworkmanager.util.ConnectionProvider;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -25,7 +26,7 @@ public class AssessmentDao {
         String sql = "INSERT INTO assessment (course_id, title, due_date, weight, status, priority, notes) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = ConnectionProvider.getConnection(dataSource);
              PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setInt(1, assessment.getCourseId());
@@ -51,7 +52,7 @@ public class AssessmentDao {
         String sql = "SELECT id, course_id, title, due_date, weight, status, priority, notes FROM assessment";
         List<Assessment> assessments = new ArrayList<>();
 
-        try (Connection conn = dataSource.getConnection();
+        try (Connection conn = ConnectionProvider.getConnection(dataSource);
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -67,7 +68,7 @@ public class AssessmentDao {
         String sql = "SELECT id, course_id, title, due_date, weight, status, priority, notes " +
                 "FROM assessment WHERE id = ?";
 
-        try (Connection conn = dataSource.getConnection();
+        try (Connection conn = ConnectionProvider.getConnection(dataSource);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
@@ -87,7 +88,7 @@ public class AssessmentDao {
                 "FROM assessment WHERE course_id = ?";
         List<Assessment> assessments = new ArrayList<>();
 
-        try (Connection conn = dataSource.getConnection();
+        try (Connection conn = ConnectionProvider.getConnection(dataSource);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, courseId);
@@ -119,7 +120,7 @@ public class AssessmentDao {
         String sql = "UPDATE assessment SET course_id = ?, title = ?, due_date = ?, weight = ?, " +
                 "status = ?, priority = ?, notes = ? WHERE id = ?";
 
-        try (Connection conn = dataSource.getConnection();
+        try (Connection conn = ConnectionProvider.getConnection(dataSource);
             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, assessment.getCourseId());
@@ -139,7 +140,7 @@ public class AssessmentDao {
     public boolean updateStatus(int id, AssessmentStatus status) throws SQLException {
         String sql = "UPDATE assessment SET status = ? WHERE id = ?";
 
-        try (Connection conn = dataSource.getConnection();
+        try (Connection conn = ConnectionProvider.getConnection(dataSource);
             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, status.name());
@@ -153,7 +154,7 @@ public class AssessmentDao {
     public boolean delete(int id) throws SQLException {
         String sql = "DELETE FROM assessment WHERE id = ?";
 
-        try (Connection conn = dataSource.getConnection();
+        try (Connection conn = ConnectionProvider.getConnection(dataSource);
             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);

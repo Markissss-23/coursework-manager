@@ -3,6 +3,7 @@ package nz.ac.aut.courseworkmanager.dao;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.ApplicationScoped;
 import nz.ac.aut.courseworkmanager.model.Course;
+import nz.ac.aut.courseworkmanager.util.ConnectionProvider;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -44,7 +45,7 @@ public class CourseDao {
         String sql = "SELECT id, code, name, semester FROM course";
         List<Course> courses = new ArrayList<>();
 
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = ConnectionProvider.getConnection(dataSource);
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
 
