@@ -44,3 +44,6 @@ Also built out the exception handling layer today. Added ValidationException and
 
 Nothing throws these yet, that's next session when I build the real CourseResource and AssessmentResource.
 
+Session 9 - Sep 2 
+I built CourseResource today, replacing the old test resource with the real one. Added validation for required fields and proper handling for missing courses, using the exception classes and mappers from last session. I tested a valid create, an invalid create, get by valid and invalid id, list all, and the nested assessments endpoint. All working as expected. Also built AssessmentResource today. 
+
