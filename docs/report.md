@@ -47,3 +47,8 @@ Nothing throws these yet, that's next session when I build the real CourseResour
 Session 9 - Sep 2 
 I built CourseResource today, replacing the old test resource with the real one. Added validation for required fields and proper handling for missing courses, using the exception classes and mappers from last session. I tested a valid create, an invalid create, get by valid and invalid id, list all, and the nested assessments endpoint. All working as expected. Also built AssessmentResource today. 
 
+
+Session 10 - Sep 4
+I built the courses page today. Hit a small bug straight away, index.html had ended up inside WEB-INF which isn't accessible, so it 404. Moved it and it loaded fine after. Added a form to create courses, and delete buttons with a confirm prompt since deleting a course cascades to its assessments too. Validation errors show up as an alert.
+
+Then built the assessments page the same way, but with a course dropdown for creating assessments and a lookup so the table shows course codes instead of raw ids. Status updates happen through a dropdown on each row, mapping to the status endpoint.
