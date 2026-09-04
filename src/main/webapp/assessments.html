@@ -3,41 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Assessments - Coursework Manager</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Coursework Manager</h1>
-    <nav><a href="index.html">Courses</a> | <a href="assessments.html">Assessments</a></nav>
+    <div class="app">
+        <aside class="sidebar">
+            <h3>Coursework manager</h3>
+            <a href="index.html" class="nav-item"><span class="hash">#</span> courses</a>
+            <a href="assessments.html" class="nav-item active"><span class="hash">#</span> assessments</a>
+        </aside>
 
-    <section>
-        <h2>Assessments</h2>
-        <table id="assessmentTable">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Course</th>
-                    <th>Due Date</th>
-                    <th>Weight</th>
-                    <th>Status</th>
-                    <th>Priority</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id="assessmentTableBody"></tbody>
-        </table>
+        <main class="main">
+            <h1>Assessments</h1>
+            <p class="sub">Across all courses</p>
 
-        <h3>Add Assessment</h3>
-        <form id="assessmentForm">
-            <select id="courseId" required>
-                <option value="">Select a course</option>
-            </select>
-            <input type="text" id="title" placeholder="Title" required>
-            <input type="date" id="dueDate" required>
-            <input type="number" id="weight" placeholder="Weight (%)" min="0" max="100" step="0.1" required>
-            <input type="text" id="priority" placeholder="Priority">
-            <textarea id="notes" placeholder="Notes"></textarea>
-            <button type="submit">Add Assessment</button>
-        </form>
-    </section>
+            <h2>All assessments</h2>
+            <div id="assessmentRows"></div>
+
+            <h2 style="margin-top: 24px;">Add assessment</h2>
+            <form id="assessmentForm" class="panel-form">
+                <select id="courseId" required>
+                    <option value="">Select a course</option>
+                </select>
+                <input type="text" id="title" placeholder="Title" required>
+                <input type="date" id="dueDate" required>
+                <input type="number" id="weight" placeholder="Weight %" min="0" max="100" step="0.1" required>
+                <input type="text" id="priority" placeholder="Priority">
+                <textarea id="notes" placeholder="Notes"></textarea>
+                <button type="submit">Add assessment</button>
+            </form>
+        </main>
+    </div>
 
     <script src="js/assessments.js"></script>
 </body>

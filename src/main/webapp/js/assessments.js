@@ -20,31 +20,39 @@ async function loadCourses() {
     });
 }
 
+function statusDotClass(status) {
+    if (status === "COMPLETED") return "done";
+    if (status === "IN_PROGRESS") return "progress";
+    return "notstarted";
+}
+
+function formatDueDate(dueDate) {
+    const date = new Date(dueDate);
+    return date.toLocaleDateString("en-NZ", { day: "numeric", month: "short" });
+}
+
 async function loadAssessments() {
     const response = await fetch(`${API_BASE}/assessments`);
     const assessments = await response.json();
 
-    const tbody = document.getElementById("assessmentTableBody");
-    tbody.innerHTML = "";
+    const container = document.getElementById("assessmentRows");
+    container.innerHTML = "";
 
     assessments.forEach(assessment => {
-        const row = document.createElement("tr");
+        const row = document.createElement("div");
+        row.className = "row";
         row.innerHTML = `
-            <td>${assessment.title}</td>
-            <td>${courseLookup[assessment.courseId] ?? assessment.courseId}</td>
-            <td>${assessment.dueDate}</td>
-            <td>${assessment.weight}%</td>
-            <td>
-                <select onchange="updateStatus(${assessment.id}, this.value)">
-                    <option value="NOT_STARTED" ${assessment.status === "NOT_STARTED" ? "selected" : ""}>Not Started</option>
-                    <option value="IN_PROGRESS" ${assessment.status === "IN_PROGRESS" ? "selected" : ""}>In Progress</option>
-                    <option value="COMPLETED" ${assessment.status === "COMPLETED" ? "selected" : ""}>Completed</option>
-                </select>
-            </td>
-            <td>${assessment.priority ?? ""}</td>
-            <td><button onclick="deleteAssessment(${assessment.id})">Delete</button></td>
+            <span class="dot ${statusDotClass(assessment.status)}"></span>
+            <span class="t">${assessment.title}</span>
+            <span class="m">${courseLookup[assessment.courseId] ?? assessment.courseId} &middot; ${formatDueDate(assessment.dueDate)}</span>
+            <select onchange="updateStatus(${assessment.id}, this.value)">
+                <option value="NOT_STARTED" ${assessment.status === "NOT_STARTED" ? "selected" : ""}>Not started</option>
+                <option value="IN_PROGRESS" ${assessment.status === "IN_PROGRESS" ? "selected" : ""}>In progress</option>
+                <option value="COMPLETED" ${assessment.status === "COMPLETED" ? "selected" : ""}>Completed</option>
+            </select>
+            <button class="remove" onclick="deleteAssessment(${assessment.id})">Remove</button>
         `;
-        tbody.appendChild(row);
+        container.appendChild(row);
     });
 }
 

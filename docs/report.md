@@ -52,3 +52,8 @@ Session 10 - Sep 4
 I built the courses page today. Hit a small bug straight away, index.html had ended up inside WEB-INF which isn't accessible, so it 404. Moved it and it loaded fine after. Added a form to create courses, and delete buttons with a confirm prompt since deleting a course cascades to its assessments too. Validation errors show up as an alert.
 
 Then built the assessments page the same way, but with a course dropdown for creating assessments and a lookup so the table shows course codes instead of raw ids. Status updates happen through a dropdown on each row, mapping to the status endpoint.
+
+Session 11 - Sep 5
+I styled both of the pages today. I thought of a few different themes but I know I wanted a dashboard. I settled on something that resembles Discord's UI: dark blue backgrounds, with a sidebar for different pages (like channels)
+
+The courses page now has stat cards displaying the current data. likewise, the Assesments page has a dropdown list. 
