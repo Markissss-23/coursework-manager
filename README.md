@@ -18,7 +18,13 @@ Copy the following jars into `<payara install>/glassfish/lib/`:
 - `slf4j-api-1.7.36.jar`
 - `slf4j-nop-1.7.36.jar`
 
-These are available under `~/.m2/repository/` once the project has been built (`mvn clean package` downloads them automatically).
+These jars can be downloaded into `~/.m2/repository/` using:
+
+```
+mvn dependency:get -Dartifact=org.xerial:sqlite-jdbc:3.46.1.0
+mvn dependency:get -Dartifact=org.slf4j:slf4j-api:1.7.36
+mvn dependency:get -Dartifact=org.slf4j:slf4j-nop:1.7.36
+```
 
 **2. Configure the connection pool**
 
@@ -36,10 +42,10 @@ The database file is created automatically once the pool connects, but the table
 
 **4. Build and deploy**
 
-\`\`\`
+```
 mvn clean package
 asadmin deploy --force target/coursework-manager.war
-\`\`\`
+```
 
 ## Running the system
 
